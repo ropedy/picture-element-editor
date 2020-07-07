@@ -1,0 +1,9 @@
+@import './variables.scss';
+
+#picture-element-editor-header {
+  background-color: $darker;
+  border-bottom: 1px solid $yellow;
+
+  height: 4em;
+  padding: .5em;
+}

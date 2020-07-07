@@ -1,0 +1,9 @@
+@import './variables.scss';
+
+#picture-element-editor-footer {
+  background-color: $darker;
+  border-top: 1px solid $yellow;
+
+  height: 1em;
+  padding: .5em;
+}

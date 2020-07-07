@@ -1,0 +1,9 @@
+@import './variables.scss';
+
+#picture-element-editor-main {
+  background-color: $light;
+  position: relative;
+
+  flex: 1;
+  padding: .5em;
+}
