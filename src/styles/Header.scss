@@ -6,4 +6,47 @@
 
   height: 4em;
   padding: .5em;
+
+  z-index: 1;
+
+  button {
+    cursor: pointer;
+
+    outline: none;
+    color: $yellow;
+    width: 4em;
+    text-align: center;
+
+    margin-left: .5em;
+    float: left;
+
+    border-radius: .25em;
+    padding: .5em;
+    border: 1px solid $yellow;
+    background-color: $dark;
+
+    span {
+      display: block;
+    }
+
+    svg {
+      font-size: 2.5em;
+    }
+
+    &:hover {
+      color: $lighter;
+      border-color: $lighter;
+      background-color: $light;
+    }
+
+    &:active {
+      border-color: white;
+    }
+  }
+
+  img {
+    float: left;
+    height: 4em;
+    margin-right: .5em;
+  }
 }
