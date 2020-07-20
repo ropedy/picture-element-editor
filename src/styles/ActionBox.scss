@@ -6,7 +6,24 @@
   box-shadow: 0 0 10px 2px rgba(black, .5);
   border-radius: .25em;
   padding: .5em;
+  z-index: 1;
 
   position: absolute;
   left: 5.5em;
+  width: 8em;
+
+  .action-box-header {
+    margin-bottom: .75em;
+
+    .action-box-header-title {
+      color: $yellow;
+    }
+
+    button {
+      float: right;
+      height: 1.5em;
+      width: 1.5em;
+      padding: 0.125em;
+    }
+  }
 }

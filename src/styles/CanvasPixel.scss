@@ -3,9 +3,6 @@
 .canvas-pixel {
   display: inline-block;
 
-  width: calc(25% - 1px);
-  height: calc(25% - 1px);
-
   border-bottom: 1px solid $lighter;
   border-right: 1px solid $lighter;
 }

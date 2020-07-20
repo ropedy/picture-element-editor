@@ -1,0 +1,29 @@
+@import './variables.scss';
+
+#new-project {
+  div {
+    margin-bottom: .5em;
+
+    &:last-of-type {
+      margin-bottom: 1em;
+    }
+  }
+
+  input {
+    width: 3em;
+    float: right;
+    background-color: white;
+    outline: none;
+    border-radius: .25em;
+    border: 2px solid $lighter;
+
+    &:focus {
+      border-color: $yellow;
+    }
+  }
+
+  button {
+    float: right;
+    padding: .25em .5em;
+  }
+}

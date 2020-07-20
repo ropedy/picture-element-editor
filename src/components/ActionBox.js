@@ -1,5 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+
+import NewProject from './NewProject';
 
 import { hideBox } from '../reducers/actionBoxReducer';
 
@@ -7,11 +12,24 @@ import '../styles/ActionBox.scss';
 
 const ActionBox = () => {
   const dispatch = useDispatch();
-  const { show, boxType } = useSelector(({ actionBox }) => actionBox);
+  const { boxType } = useSelector(({ actionBox }) => actionBox);
 
-  if (!show) {
-    return null;
-  }
+  const closeBox = evt => {
+    const box = document.querySelector('.action-box');
+    const target = evt.target;
+
+    if (!box.contains(target)) {
+      dispatch(hideBox());
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', closeBox);
+
+    return () => {
+      document.removeEventListener('click', closeBox);
+    };
+  }, []);
 
   const getTitle = () => {
     switch (boxType) {
@@ -25,7 +43,7 @@ const ActionBox = () => {
   const renderBox = () => {
     switch (boxType) {
       case 'newProject':
-        return 'New project';
+        return <NewProject />;
       default:
         return null;
     }
@@ -33,7 +51,11 @@ const ActionBox = () => {
 
 
   return <div className='action-box'>
-    <div>{getTitle()}<button onClick={() => dispatch(hideBox())}>CLOSE</button></div>
+    <div className='action-box-header'>
+      <span className='action-box-header-title'>{getTitle()}</span>
+      <button onClick={() => dispatch(hideBox())}><FontAwesomeIcon  className='icon' icon={faTimes} /></button>
+    </div>
+    {renderBox()}
   </div>;
 };
 
