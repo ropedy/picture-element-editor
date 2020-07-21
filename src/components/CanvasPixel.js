@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useDrop } from 'react-dnd';
+import { useDrop, useDrag } from 'react-dnd';
 
 import { setPixel } from '../reducers/canvasReducer';
 
@@ -11,12 +11,45 @@ const CanvasPixel = ({ id, color }) => {
   const { width, height } = useSelector(({ canvas }) => canvas.size);
 
   const [{ isOver }, drop] = useDrop({
-    accept: 'palette-color',
-    drop: item => dispatch(setPixel(id, item.color)),
-    collect: (monitor) => ({
+    accept: ['palette-color', 'canvas-pixel'],
+    drop: item => {
+      if (item.type === 'palette-color') {
+        dispatch(setPixel(id, item.color));
+      }
+
+      return { id, color };
+    },
+    collect: monitor => ({
       isOver: monitor.isOver()
     }),
   });
+
+  const [, drag] = useDrag({
+    item: {
+      type: 'canvas-pixel',
+      color, id
+    },
+    end: (item, monitor) => {
+      const dropResult = monitor.getDropResult();
+
+      if (!dropResult) {
+        return;
+      }
+      const alt = dropResult.dropEffect === 'copy';
+      const { id, color } = dropResult;
+
+      if (alt) {
+        dispatch(setPixel(item.id, color));
+      }
+
+      dispatch(setPixel(id, item.color));
+    }
+  });
+
+  const dndRef = element => {
+    drag(element);
+    drop(element);
+  };
 
   const style = {
     backgroundColor: isOver ? 'black' : color,
@@ -24,7 +57,7 @@ const CanvasPixel = ({ id, color }) => {
     height: `calc(${100 / height}% - 1px)`
   };
 
-  return <div ref={drop} className='canvas-pixel' style={style} />;
+  return <div ref={dndRef} className='canvas-pixel' style={style} />;
 };
 
 export default CanvasPixel;
