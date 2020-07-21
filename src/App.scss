@@ -28,7 +28,7 @@ button {
     background-color: $light;
   }
 
-  &:active {
+  &:active:not(:disabled) {
     border-color: white;
   }
 

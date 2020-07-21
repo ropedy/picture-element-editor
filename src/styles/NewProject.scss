@@ -2,9 +2,11 @@
 
 #new-project {
   div {
-    margin-bottom: .5em;
+    &:first-child {
+      margin-bottom: .5em;
+    }
 
-    &:last-of-type {
+    &:nth-child(2) {
       margin-bottom: 1em;
     }
   }
@@ -22,8 +24,48 @@
     }
   }
 
-  button {
-    float: right;
-    padding: .25em .5em;
+  .new-button-wrapper {
+    height: 1.5em;
+
+    button {
+      float: right;
+      padding: .25em .5em;
+    }
+  }
+
+  .expand-indicator {
+    text-align: center;
+    color: $yellow;
+    height: .5em;
+    padding-bottom: 0.5em;
+  }
+
+  .quick-sizing-div {
+    width: 8em;
+    height: 8em;
+    margin-bottom: .5em;
+
+    table {
+      width: 8.5em;
+      height: 8.5em;
+      border-collapse: separate;
+      border-spacing: 0.25em;
+      transform: translate(-.25em, -.25em);
+
+      tr {
+        td {
+          cursor: pointer;
+          background-color: $lighter;
+
+          &.highlight {
+            background-color: $yellow;
+          }
+
+          &:active {
+            background-color: $dark;
+          }
+        }
+      }
+    }
   }
 }
