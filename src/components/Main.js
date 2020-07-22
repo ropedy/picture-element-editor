@@ -5,6 +5,7 @@ import { useDrop } from 'react-dnd';
 import ColorPalette from './ColorPalette';
 import Canvas from './Canvas';
 import ActionBox from './ActionBox';
+import Preview from './Preview';
 
 import { setPixel } from '../reducers/canvasReducer';
 
@@ -29,6 +30,7 @@ const Main = () => {
     {show ? <ActionBox /> : null}
     <ColorPalette />
     <Canvas />
+    <Preview />
   </main>;
 };
 

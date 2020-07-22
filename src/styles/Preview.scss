@@ -1,0 +1,54 @@
+@import './variables.scss';
+
+#preview {
+  background-color: $light;
+  border: 1px solid $yellow;
+  box-shadow: 0 0 10px 2px rgba(black, .5);
+  border-radius: .25em;
+  z-index: 1;
+  padding: .5em;
+
+  position: absolute;
+  bottom: .5em;
+  right: .5em;
+
+  width: auto;
+  height: auto;
+  min-width: 12em;
+  
+  display: flex;
+  flex-direction: column;
+
+  #preview-canvas-div {
+    height: auto;
+    width: 100%;
+
+    flex: 1;
+
+    place-items: center;
+
+    margin-bottom: .5em;
+  }
+
+  footer {
+
+    .zoom-value-display {
+      width: 2em;
+      text-align: center;
+    }
+
+    button {
+      width: 1.5em;
+      height: 1.5em;
+      padding: .125em;
+    }
+
+    .preview-toggle-button {
+      margin-left: 1em;
+    }
+
+    .minus-button, .plus-button, .preview-toggle-button, .zoom-value-display {
+      float: right;
+    }
+  }
+}
