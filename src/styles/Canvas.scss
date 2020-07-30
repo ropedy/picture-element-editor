@@ -1,13 +1,8 @@
 @import './variables.scss';
 
-#canvas {
-  background-color: transparent;
-  line-height: 0;
-
+#main-canvas-div {
   position: absolute;
   top: 50%;
   left: 50%;
-
-  border-top: 1px solid $lighter;
-  border-left: 1px solid $lighter;
 }
+

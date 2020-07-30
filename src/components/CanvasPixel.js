@@ -1,27 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useDrop, useDrag } from 'react-dnd';
+import { useDrag, useDrop } from 'react-dnd';
 
 import { setPixel } from '../reducers/canvasReducer';
 
 import '../styles/CanvasPixel.scss';
 
-const CanvasPixel = ({ id, color }) => {
+const CanvasPixel = ({ id, color, x, y, pixelSize, hidePixel, setCanvasPixel }) => {
   const dispatch = useDispatch();
+  const [ mouseDown, setMouseDown ] = useState(false);
   const { width, height } = useSelector(({ canvas }) => canvas.size);
+  const { Space: spaceDown } = useSelector(({ keyboard }) => keyboard);
 
-  const [{ isOver }, drop] = useDrop({
+  const [, drop] = useDrop({
     accept: ['palette-color', 'canvas-pixel'],
     drop: item => {
       if (item.type === 'palette-color') {
         dispatch(setPixel(id, item.color));
       }
 
+      setCanvasPixel({ id, color: item.color, x, y });
+
       return { id, color };
-    },
-    collect: monitor => ({
-      isOver: monitor.isOver()
-    }),
+    }
   });
 
   const [, drag] = useDrag({
@@ -29,12 +30,16 @@ const CanvasPixel = ({ id, color }) => {
       type: 'canvas-pixel',
       color, id
     },
+    canDrag: () => {
+      return !spaceDown;
+    },
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult();
 
       if (!dropResult) {
         return;
       }
+
       const alt = dropResult.dropEffect === 'copy';
       const { id, color } = dropResult;
 
@@ -46,18 +51,44 @@ const CanvasPixel = ({ id, color }) => {
     }
   });
 
+  let hlColor = 'white';
+
+  if (color) {
+    const red = parseInt(color.slice(1, 3), 16);
+    const green = parseInt(color.slice(3, 5), 16);
+    const blue = parseInt(color.slice(5, 7), 16);
+
+    if (382 < red + green + blue) {
+      hlColor = 'black';
+    }
+  }
+
+  const lastCol = x === (width - 1);
+  const lastRow = y === (height - 1);
+  const borderSizeFix = mouseDown ? 2 : 0;
+  const style = {
+    left: `${x * pixelSize + 1}px`,
+    top: `${y * pixelSize + 1}px`,
+    width: `calc(${100 / width}% - ${(lastCol ? 2 : 1) + borderSizeFix}px)`,
+    height: `calc(${100 / height}% - ${(lastRow ? 2 : 1) + borderSizeFix}px)`,
+    backgroundColor: mouseDown ? color : hlColor,
+    opacity: mouseDown ? '1' : '.5',
+    border: mouseDown ? '1px solid #B6B4CE' : 'none'
+  };
+
   const dndRef = element => {
     drag(element);
     drop(element);
   };
 
-  const style = {
-    backgroundColor: isOver ? 'black' : color,
-    width: `calc(${100 / width}% - 1px)`,
-    height: `calc(${100 / height}% - 1px)`
-  };
-
-  return <div ref={dndRef} className='canvas-pixel' style={style} />;
+  return <div
+    ref={dndRef}
+    id='canvas-pixel'
+    style={style}
+    onMouseDown={() => setMouseDown(true)}
+    onMouseUp={() => setMouseDown(false)}
+    onMouseOut={hidePixel}
+  />;
 };
 
 export default CanvasPixel;

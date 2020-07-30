@@ -1,8 +1,6 @@
 @import './variables.scss';
 
-.canvas-pixel {
-  display: inline-block;
-
-  border-bottom: 1px solid $lighter;
-  border-right: 1px solid $lighter;
+#canvas-pixel {
+  cursor: pointer;
+  position: absolute;
 }
