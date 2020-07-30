@@ -13,6 +13,7 @@ const createPixels = size => {
 
 const initialState = {
   size: { width: 4, height: 4 },
+  offset: { x: 0, y: 0 },
   zoom: 1,
   pixels: createPixels(16)
 };
@@ -27,8 +28,24 @@ const getInitialZoom = size => {
 
 const canvasReducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'UPDATE_OFFSET':
+      return { ...state,
+        offset: {
+          x: state.offset.x + action.vector.x,
+          y: state.offset.y + action.vector.y
+        }
+      };
+    case 'UPDATE_ZOOM':
+      return { ...state,
+        zoom: Math.max(state.zoom * (action.up ? 2 : .5), 0.0625)
+      };
     case 'NEW_PROJECT':
-      return { pixels: createPixels(action.size.width * action.size.height), zoom: getInitialZoom(action.size), size: action.size };
+      return { ...state,
+        pixels: createPixels(action.size.width * action.size.height),
+        zoom: getInitialZoom(action.size),
+        size: action.size,
+        offset: { x: 0, y: 0 }
+      };
     case 'SET_PIXEL':
       return { ...state, pixels: state.pixels.map(p => p.id !== action.id ? p : { ...p, color: action.color }) };
     default:
@@ -47,6 +64,20 @@ export const setPixel = (id, color) => {
   return {
     type: 'SET_PIXEL',
     id, color
+  };
+};
+
+export const updateOffset = vector => {
+  return {
+    type: 'UPDATE_OFFSET',
+    vector
+  };
+};
+
+export const updateZoom = up => {
+  return {
+    type: 'UPDATE_ZOOM',
+    up
   };
 };
 

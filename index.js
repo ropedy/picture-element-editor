@@ -8,6 +8,10 @@ import store from './src/store';
 
 import App from './src/App';
 
+import listenKeyboard from './src/utils/keyboardListener';
+
+listenKeyboard();
+
 ReactDOM.render(
   <Provider store={store}>
     <DndProvider backend={HTML5Backend}>
