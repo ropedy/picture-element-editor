@@ -76,6 +76,14 @@ const CanvasPixel = ({ id, color, x, y, pixelSize, hidePixel, setCanvasPixel }) 
     border: mouseDown ? '1px solid #B6B4CE' : 'none'
   };
 
+  const onMouseDown = evt => {
+    setMouseDown(true);
+
+    if (evt.shiftKey) {
+      dispatch(setPixel(id, null));
+    }
+  };
+
   const dndRef = element => {
     drag(element);
     drop(element);
@@ -85,7 +93,7 @@ const CanvasPixel = ({ id, color, x, y, pixelSize, hidePixel, setCanvasPixel }) 
     ref={dndRef}
     id='canvas-pixel'
     style={style}
-    onMouseDown={() => setMouseDown(true)}
+    onMouseDown={onMouseDown}
     onMouseUp={() => setMouseDown(false)}
     onMouseOut={hidePixel}
   />;
