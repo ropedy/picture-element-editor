@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 
 import CanvasPixel from './CanvasPixel';
 
+import { isLight } from '../utils/colorUtils';
+
 import '../styles/Canvas.scss';
 
 const Canvas = () => {
@@ -21,12 +23,17 @@ const Canvas = () => {
     canvas.height = height;
 
     for (const pixel of pixels) {
-      if (pixel.color) {
-        const idx = pixels.indexOf(pixel);
-        const x = idx % size.width;
-        const y = Math.floor(idx / size.width);
+      const idx = pixels.indexOf(pixel);
+      const x = idx % size.width;
+      const y = Math.floor(idx / size.width);
 
+      if (pixel.color) {
         context.fillStyle = pixel.color;
+        context.fillRect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
+      }
+
+      if (canvasPixel && (canvasPixel.x === x ^ canvasPixel.y === y)) {
+        context.fillStyle = `rgba(${isLight(pixel.color) ? '255, 255, 255' : '0, 0, 0'}, .2)`;
         context.fillRect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
       }
     }

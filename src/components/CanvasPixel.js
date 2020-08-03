@@ -4,6 +4,8 @@ import { useDrag, useDrop } from 'react-dnd';
 
 import { setPixel } from '../reducers/canvasReducer';
 
+import { isLight } from '../utils/colorUtils';
+
 import '../styles/CanvasPixel.scss';
 
 const CanvasPixel = ({ id, color, x, y, pixelSize, hidePixel, setCanvasPixel }) => {
@@ -51,17 +53,7 @@ const CanvasPixel = ({ id, color, x, y, pixelSize, hidePixel, setCanvasPixel }) 
     }
   });
 
-  let hlColor = 'white';
-
-  if (color) {
-    const red = parseInt(color.slice(1, 3), 16);
-    const green = parseInt(color.slice(3, 5), 16);
-    const blue = parseInt(color.slice(5, 7), 16);
-
-    if (382 < red + green + blue) {
-      hlColor = 'black';
-    }
-  }
+  let hlColor = isLight(color) ? 'white' : 'black';
 
   const lastCol = x === (width - 1);
   const lastRow = y === (height - 1);
