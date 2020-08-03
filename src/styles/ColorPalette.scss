@@ -16,4 +16,10 @@
   transform: translateY(-50%);
   width: 4em;
   line-height: 0;
+
+  #color-palette-handle {
+    color: $yellow;
+    height: 1.5em;
+    text-align: center;
+  }
 }
