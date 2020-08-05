@@ -4,10 +4,12 @@ html {
   overflow: hidden;
 }
 
-#picture-element-editor {
+#picture-element-editor, button, input {
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-size: 16px;
+}
 
+#picture-element-editor {
   color: $lighter;
 
   display: flex;
