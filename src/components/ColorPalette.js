@@ -3,25 +3,16 @@ import { useSelector } from 'react-redux';
 
 import PaletteColor from './PaletteColor';
 
+import { useRefState } from '../utils/hooks';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGripLines } from '@fortawesome/free-solid-svg-icons';
 
 import '../styles/ColorPalette.scss';
 
 const ColorPalette = () => {
-  const [ grabActive, _setGrabActive ] = useState(false);
-  const grabActiveRef = useRef(grabActive);
-  const setGrabActive = value => {
-    grabActiveRef.current = value;
-    _setGrabActive(value);
-  };
-
-  const [ offset, _setOffset ] = useState({ x: 0, y: 0 });
-  const offsetRef = useRef(offset);
-  const setOffset = value => {
-    offsetRef.current = value;
-    _setOffset(value);
-  };
+  const [ grabActive, grabActiveRef, setGrabActive ] = useRefState(false);
+  const [ offset, offsetRef, setOffset ] = useRefState({ x: 0, y: 0 });
 
   const colors = useSelector(({ palette }) => palette.palettes.find(p => p.id === palette.currentPalette).colors);
 
