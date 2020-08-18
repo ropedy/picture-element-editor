@@ -1,0 +1,9 @@
+@import './variables.scss';
+
+#color-swap {
+  width: 15em;
+
+  .delete-button {
+    display: inline-block;
+  }
+}

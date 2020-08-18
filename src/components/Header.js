@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBorderAll } from '@fortawesome/free-solid-svg-icons';
+import { faBorderAll, faClone } from '@fortawesome/free-solid-svg-icons';
 
 import ZoomButtons from './ZoomButtons';
 
@@ -13,14 +13,24 @@ import icon from '../../icon.svg';
 import '../styles/Header.scss';
 
 const Header = () => {
-  const show = useSelector(({ actionBox }) => actionBox.show);
+  const { show, boxType } = useSelector(({ actionBox }) => actionBox);
   const dispatch = useDispatch();
+
   const newProject = () => {
-    if (show) {
+    if (show && boxType === 'newProject') {
       dispatch(hideBox());
     }
     else {
       dispatch(showBox('newProject'));
+    }
+  };
+
+  const colorSwap = () => {
+    if (show && boxType === 'colorSwap') {
+      dispatch(hideBox());
+    }
+    else {
+      dispatch(showBox('colorSwap'));
     }
   };
 
@@ -31,6 +41,10 @@ const Header = () => {
       <FontAwesomeIcon className='icon' icon={faBorderAll} />
     </button>
     <ZoomButtons />
+    <button className='full-button' onClick={colorSwap}>
+      <span>Swap</span>
+      <FontAwesomeIcon className='icon' icon={faClone} />
+    </button>
   </header>;
 };
 

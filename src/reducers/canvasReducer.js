@@ -48,6 +48,17 @@ const canvasReducer = (state = initialState, action) => {
       };
     case 'SET_PIXEL':
       return { ...state, pixels: state.pixels.map(p => p.id !== action.id ? p : { ...p, color: action.color }) };
+    case 'SWAP_COLORS': {
+      const pixels = state.pixels.map(p => {
+        const swapColors = Object.keys(action.colorSwapData).map(c => c === 'null' ? null : c);
+        const colorShouldSwap = swapColors.includes(p.color);
+        const color = colorShouldSwap ? action.colorSwapData[p.color] : p.color;
+
+        return { ...p, color };
+      });
+
+      return { ...state, pixels };
+    }
     default:
       return state;
   }
@@ -78,6 +89,13 @@ export const updateZoom = up => {
   return {
     type: 'UPDATE_ZOOM',
     up
+  };
+};
+
+export const swapColors = colorSwapData => {
+  return {
+    type: 'SWAP_COLORS',
+    colorSwapData
   };
 };
 
