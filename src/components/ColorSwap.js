@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
+import { faLongArrowAltRight, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 import { swapColors } from '../reducers/canvasReducer';
 import { setColorSwapRows, hideBox } from '../reducers/actionBoxReducer';
@@ -18,7 +18,7 @@ const ColorSwapRow = ({ row, colors, rowChanged, deleteRow }) => {
     rowChanged(row.id, key, value);
   };
 
-  return <div>
+  return <div className='color-swap-row'>
     <select value={row.from || 'transparent'} onChange={evt => onRowChange(evt, 'from')}>
       {colors.map(c => {
         return <option key={c} value={c}>{c || 'transparent'}</option>;
@@ -30,7 +30,9 @@ const ColorSwapRow = ({ row, colors, rowChanged, deleteRow }) => {
         return <option key={c} value={c}>{c || 'transparent'}</option>;
       })}
     </select>
-    <button className='delete-button' onClick={() => deleteRow(row.id)}>del</button>
+    <button className='row-count-button' onClick={() => deleteRow(row.id)}>
+      <FontAwesomeIcon className='icon' icon={faMinus} />
+    </button>
   </div>;
 };
 
@@ -58,12 +60,16 @@ const ColorSwap = () => {
     dispatch(setColorSwapRows(colorSwapRows.filter(c => c.id !== id)));
   };
 
+  const reset = () => {
+    dispatch(setColorSwapRows([{ id: getId(), from: null, to: null }]));
+  };
+
   const changeColors = () => {
     const colorSwapData = Object.fromEntries(colorSwapRows.map(row => [ row.from, row.to ]));
 
     dispatch(swapColors(colorSwapData));
     dispatch(hideBox());
-    dispatch(setColorSwapRows([{ id: getId(), from: null, to: null }]));
+    reset();
   };
 
   return <div id='color-swap'>
@@ -74,8 +80,15 @@ const ColorSwap = () => {
       rowChanged={rowChanged}
       deleteRow={deleteRow}
     />)}
-    <button onClick={addRow}>new</button>
-    <button onClick={changeColors}>change colors</button>
+    <div className='empty-row'>
+      <button className='row-count-button' onClick={addRow}>
+        <FontAwesomeIcon className='icon' icon={faPlus} />
+      </button>
+    </div>
+    <div className='swap-buttons-wrapper'>
+      <button id='color-swap-reset' onClick={reset}>Reset</button>
+      <button id='color-swap-exec' className='' onClick={changeColors}>Swap colors</button>
+    </div>
   </div>;
 };
 

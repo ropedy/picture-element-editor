@@ -2,8 +2,34 @@
 
 #color-swap {
   width: 15em;
+  padding-bottom: .5em;
+  
+  .color-swap-row {
+    height: 1.5em;
+    margin-bottom: .5em;
+  }
 
-  .delete-button {
-    display: inline-block;
+  .empty-row {
+    overflow: hidden;
+    margin-bottom: .5em;
+  }
+
+  .row-count-button {
+    height: 1.5em;
+    width: 1.5em;
+    padding: 0;
+    float: right;
+  }
+
+  .swap-buttons-wrapper {
+    overflow: hidden;
+
+    #color-swap-reset {
+      float: left;
+    }
+
+    #color-swap-exec {
+      float: right;
+    }
   }
 }

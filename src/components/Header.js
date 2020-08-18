@@ -36,12 +36,12 @@ const Header = () => {
 
   return <header id='picture-element-editor-header'>
     <img src={icon} />
-    <button className='full-button' onClick={newProject}>
+    <button className='full-button action-button' onClick={newProject}>
       <span>New</span>
       <FontAwesomeIcon className='icon' icon={faBorderAll} />
     </button>
     <ZoomButtons />
-    <button className='full-button' onClick={colorSwap}>
+    <button className='full-button action-button' onClick={colorSwap}>
       <span>Swap</span>
       <FontAwesomeIcon className='icon' icon={faClone} />
     </button>

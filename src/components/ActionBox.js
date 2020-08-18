@@ -19,8 +19,9 @@ const ActionBox = () => {
     const box = document.querySelector('.action-box');
     const target = evt.target;
     const targetRemoved = !document.contains(target);
+    const isActionButton = !!target.closest('#picture-element-editor-header > .action-button');
 
-    if (!box.contains(target) && !targetRemoved) {
+    if (!box.contains(target) && !targetRemoved && !isActionButton) {
       dispatch(hideBox());
     }
   };
