@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLongArrowAltRight, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
+import ColorDropdown from './ColorDropdown';
+
 import { swapColors } from '../reducers/canvasReducer';
 import { setColorSwapRows, hideBox } from '../reducers/actionBoxReducer';
 
@@ -12,24 +14,10 @@ import { getId } from '../utils/utils';
 import '../styles/ColorSwap';
 
 const ColorSwapRow = ({ row, colors, rowChanged, deleteRow }) => {
-  const onRowChange = (evt, key) => {
-    const value = evt.target.value === 'transparent' ? null : evt.target.value;
-
-    rowChanged(row.id, key, value);
-  };
-
   return <div className='color-swap-row'>
-    <select value={row.from || 'transparent'} onChange={evt => onRowChange(evt, 'from')}>
-      {colors.map(c => {
-        return <option key={c} value={c}>{c || 'transparent'}</option>;
-      })}
-    </select>
-    <span><FontAwesomeIcon className='icon' icon={faLongArrowAltRight} /></span>
-    <select value={row.to || 'transparent'} onChange={evt => onRowChange(evt, 'to')}>
-      {colors.map(c => {
-        return <option key={c} value={c}>{c || 'transparent'}</option>;
-      })}
-    </select>
+    <ColorDropdown colors={colors} selected={row.from} onChange={color => rowChanged(row.id, 'from', color)} />
+    <span className='color-swap-arrow'><FontAwesomeIcon className='icon' icon={faLongArrowAltRight} /></span>
+    <ColorDropdown colors={colors} selected={row.to} onChange={color => rowChanged(row.id, 'to', color)} />
     <button className='row-count-button' onClick={() => deleteRow(row.id)}>
       <FontAwesomeIcon className='icon' icon={faMinus} />
     </button>

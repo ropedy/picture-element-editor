@@ -1,12 +1,18 @@
 @import './variables.scss';
 
 #color-swap {
-  width: 15em;
+  width: 20em;
   padding-bottom: .5em;
   
   .color-swap-row {
     height: 1.5em;
     margin-bottom: .5em;
+
+    .color-swap-arrow {
+      display: inline-block;
+      transform: translateY(-6px);
+      padding: .5em;
+    }
   }
 
   .empty-row {

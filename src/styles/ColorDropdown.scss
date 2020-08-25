@@ -1,0 +1,111 @@
+@import './variables.scss';
+
+.color-dropdown {
+  position: relative;
+  display: inline-block;
+  color: $yellow;
+
+  .color-dropdown-main {
+    user-select: none;
+    width: 7em;
+    padding: .25em;
+    background-color: $light;
+
+    border: 1px solid $yellow;
+    border-radius: .25em;
+    display: inline-block;
+    cursor: pointer;
+
+    .selected-color-indicator {
+      float: left;
+
+      width: calc(1em - 2px);
+      height: calc(1em - 2px);
+
+      border: 1px solid $yellow;
+      border-radius: .25em;
+
+      &.hidden {
+        visibility: hidden;
+      }
+    }
+
+    .selected-color-text {
+      height: 1em;
+      float: left;
+      margin-left: .5em;
+      transform: translateY(-2px);
+    }
+
+    .selected-color-icon {
+      height: 1em;
+      float: right;
+      transform: translateY(-1px);
+    }
+
+    &:hover {
+      color: $lighter;
+      background-color: $light;
+      border-color: $lighter;
+
+      .selected-color-indicator {
+        border-color: $lighter;
+      }
+    }
+
+    &:active {
+      border-color: white;
+    }
+  }
+
+  .color-dropdown-list {
+    padding: .25em 0;
+    background-color: $light;
+
+    border: 1px solid $yellow;
+    border-radius: .25em;
+
+    position: absolute;
+    top: 1.75em;
+    z-index: 3;
+    box-shadow: 0 0 10px 2px rgba(black, .5);
+
+    .color-dropdown-list-row-wrapper {
+      display: block;
+      height: 1em;
+      cursor: pointer;
+
+      padding: .25em .5em;
+
+      &:hover {
+        background-color: $lighter;
+        color: $dark;
+
+        .row-color-indicator {
+          border-color: $lighter;
+        }
+      }
+
+      .row-color-indicator {
+        float: left;
+    
+        width: calc(1em - 2px);
+        height: calc(1em - 2px);
+    
+        border: 1px solid $yellow;
+        border-radius: .25em;
+
+        &.hidden {
+          visibility: hidden;
+        }
+      }
+    
+      .row-color-text {
+        height: 1em;
+        float: left;
+        margin-left: .5em;
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
