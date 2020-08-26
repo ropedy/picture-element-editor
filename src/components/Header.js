@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBorderAll, faClone } from '@fortawesome/free-solid-svg-icons';
+import { faBorderAll, faClone, faFileExport } from '@fortawesome/free-solid-svg-icons';
 
 import ZoomButtons from './ZoomButtons';
 
@@ -34,6 +34,15 @@ const Header = () => {
     }
   };
 
+  const save = () => {
+    if (show && boxType === 'export') {
+      dispatch(hideBox());
+    }
+    else {
+      dispatch(showBox('export'));
+    }
+  };
+
   return <header id='picture-element-editor-header'>
     <img src={icon} />
     <button className='full-button action-button' onClick={newProject}>
@@ -44,6 +53,10 @@ const Header = () => {
     <button className='full-button action-button' onClick={colorSwap}>
       <span>Swap</span>
       <FontAwesomeIcon className='icon' icon={faClone} />
+    </button>
+    <button className='full-button action-button right' onClick={save}>
+      <span>Save</span>
+      <FontAwesomeIcon className='icon' icon={faFileExport} />
     </button>
   </header>;
 };

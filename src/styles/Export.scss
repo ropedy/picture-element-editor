@@ -1,0 +1,30 @@
+@import './variables.scss';
+
+#export {
+  width: 10em;
+  margin-bottom: .5em;
+  overflow: hidden;
+
+  #export-size {
+    height: 1.6125em;
+    margin-bottom: .5em;
+
+    label {
+      vertical-align: middle;
+    }
+  }
+
+  #image-dimensions {
+    div:first-child {
+      color: $yellow;
+      margin-bottom: .25em;
+    }
+
+    margin-bottom: .5em;
+  }
+
+  button {
+    float: right;
+    padding: .25em .5em;
+  }
+}

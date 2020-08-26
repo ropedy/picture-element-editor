@@ -6,6 +6,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import NewProject from './NewProject';
 import ColorSwap from './ColorSwap';
+import Export from './Export';
 
 import { hideBox } from '../reducers/actionBoxReducer';
 
@@ -34,14 +35,16 @@ const ActionBox = () => {
     };
   }, []);
 
-  const getLeft = () => {
+  const getPosition = () => {
     switch (boxType) {
       case 'newProject':
-        return '5.5em';
+        return { left: '5.5em' };
       case 'colorSwap':
-        return '15em';
+        return { left: '15em' };
+      case 'export':
+        return { right: '.5em' };
       default:
-        return '0';
+        return { left: '0' };
     }
   };
 
@@ -51,6 +54,8 @@ const ActionBox = () => {
         return 'New project';
       case 'colorSwap':
         return 'Color swap';
+      case 'export':
+        return 'Export';
       default:
         return null;
     }
@@ -62,13 +67,15 @@ const ActionBox = () => {
         return <NewProject />;
       case 'colorSwap':
         return <ColorSwap />;
+      case 'export':
+        return <Export />;
       default:
         return null;
     }
   };
 
 
-  return <div className='action-box' style={{ left: getLeft() }}>
+  return <div className='action-box' style={getPosition()}>
     <div className='action-box-header'>
       <span className='action-box-header-title'>{getTitle()}</span>
       <button onClick={() => dispatch(hideBox())}><FontAwesomeIcon  className='icon' icon={faTimes} /></button>

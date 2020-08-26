@@ -4,25 +4,18 @@
   width: 8em;
 
   div {
+    overflow: hidden;
+
     &:first-child {
-      margin-bottom: .5em;
+      margin-bottom: .25em;
     }
 
     &:nth-child(2) {
-      margin-bottom: 1em;
+      margin-bottom: .5em;
     }
-  }
 
-  input {
-    width: 3em;
-    float: right;
-    background-color: white;
-    outline: none;
-    border-radius: .25em;
-    border: 2px solid $lighter;
-
-    &:focus {
-      border-color: $yellow;
+    label {
+      vertical-align: middle;
     }
   }
 

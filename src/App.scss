@@ -44,3 +44,16 @@ button {
     cursor: not-allowed;
   }
 }
+
+input[type=number] {
+  width: 3em;
+  float: right;
+  background-color: white;
+  outline: none;
+  border-radius: .25em;
+  border: 2px solid $lighter;
+
+  &:focus {
+    border-color: $yellow;
+  }
+}
