@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
+import { paintCanvas } from '../utils/utils';
+
 import '../styles/Export';
 
 const Export = () => {
@@ -14,16 +16,7 @@ const Export = () => {
     canvas.width = size.width * factor;
     canvas.height = size.height * factor;
 
-    for (const pixel of pixels) {
-      if (pixel.color) {
-        const idx = pixels.indexOf(pixel);
-        const x = idx % size.width;
-        const y = Math.floor(idx / size.width);
-
-        context.fillStyle = pixel.color;
-        context.fillRect(x * factor, y * factor, factor, factor);
-      }
-    }
+    paintCanvas(context, pixels, size.width, factor);
 
     const anchor = document.createElement('a');
     anchor.download = 'image.png';

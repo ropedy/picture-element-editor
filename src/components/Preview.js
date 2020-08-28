@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus, faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 
+import { paintCanvas } from '../utils/utils';
+
 import '../styles/Preview.scss';
 
 const Preview = () => {
@@ -32,6 +34,8 @@ const Preview = () => {
 
     canvas.width = canvasSize.width;
     canvas.height = canvasSize.height;
+
+    paintCanvas(context, pixels, size.width, zoomValue);
 
     for (const pixel of pixels) {
       if (pixel.color) {
