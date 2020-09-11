@@ -1,0 +1,51 @@
+@import './variables.scss';
+
+#color-editor-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(black, .9);
+  z-index: 3;
+
+  #color-editor {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50em;
+    height: 40em;
+
+    background-color: $light;
+    border: 1px solid $yellow;
+    box-shadow: 0 0 10px 2px rgba(black, .5);
+    border-radius: .25em;
+    padding: .5em;
+
+    .dropdown {
+      float: left;
+    }
+
+    .activate-button {
+      padding: .25em .5em;
+      float: right;
+    }
+  
+    #color-editor-header {
+      margin-bottom: .75em;
+  
+      #color-editor-header-title {
+        color: $yellow;
+      }
+  
+      button {
+        float: right;
+        height: 1.25em;
+        width: 1.25em;
+        padding: 0;
+      }
+    }
+  }
+}
+

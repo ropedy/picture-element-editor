@@ -57,7 +57,8 @@ const ColorPalette = () => {
 
   const style = {
     transform: `translate(${offset.x}px, calc(-50% + ${offset.y}px))`,
-    cursor: grabActive ?  'grabbing' : 'grab'
+    cursor: grabActive ?  'grabbing' : 'grab',
+    width: `${Math.ceil(colors.length / 16) * 2}em`
   };
 
   return <div id='color-palette' style={style}>

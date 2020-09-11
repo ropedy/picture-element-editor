@@ -6,6 +6,7 @@ import ColorPalette from './ColorPalette';
 import Canvas from './Canvas';
 import ActionBox from './ActionBox';
 import Preview from './Preview';
+import ColorEditor from './ColorEditor';
 
 import { setPixel, updateOffset } from '../reducers/canvasReducer';
 
@@ -14,7 +15,8 @@ import '../styles/Main.scss';
 const Main = () => {
   const [ mouseDown, setMouseDown ] = useState(false);
   const dispatch = useDispatch();
-  const show = useSelector(({ actionBox }) => actionBox.show);
+  const { show } = useSelector(({ actionBox }) => actionBox);
+  const { show: showColorEditor } = useSelector(({ colorEditor }) => colorEditor);
   const { Space: spaceDown } = useSelector(({ keyboard }) => keyboard);
   const [{ isOverCurrent }, drop] = useDrop({
     accept: 'canvas-pixel',
@@ -53,6 +55,7 @@ const Main = () => {
 
   return <main ref={drop} id='picture-element-editor-main'>
     {show ? <ActionBox /> : null}
+    {showColorEditor ? <ColorEditor /> : null}
     <ColorPalette />
     <Canvas />
     <Preview />
